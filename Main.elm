@@ -57,6 +57,7 @@ type Msg
     | AddVariable Variable
     | AssignTag Int Int
     | RemoveTag Int Int
+    | RemoveVariable Int
 
 
 update : Msg -> Model -> Model
@@ -75,7 +76,12 @@ update msg model =
             { model | tags = tag :: model.tags, lastId = model.lastId + 1 }
 
         AddVariable variable ->
-            { model | variables = variable :: model.variables, lastId = model.lastId + 1 }
+            { model
+                | variables = variable :: model.variables
+                , variableNameInput = ""
+                , variableValueInput = ""
+                , lastId = model.lastId + 1
+            }
 
         AssignTag varId tagId ->
             { model
@@ -87,6 +93,7 @@ update msg model =
                             else
                                 var
                         )
+                        model.variables
             }
 
         RemoveTag varId tagId ->
@@ -95,14 +102,25 @@ update msg model =
                     List.map
                         (\var ->
                             if var.id == varId then
-                                { var | tags = List.filter (\tag -> tag.id /= tagId) }
+                                { var | tags = List.filter (\id -> id /= tagId) var.tags }
                             else
                                 var
                         )
+                        model.variables
             }
 
+        RemoveVariable varId ->
+            { model | variables = List.filter (\var -> var.id /= varId) model.variables }
 
-view : Model -> Html msg
+
+view : Model -> Html Msg
 view model =
     div []
-        [ text "Hello world" ]
+        [ div []
+            [ input [ onInput SetVariableNameInput ] []
+            , input [ onInput SetVariableValueInput ] []
+            , button [ onClick (AddVariable (Variable model.lastId model.variableNameInput model.variableValueInput [])) ] [ text "add" ]
+            ]
+        , div []
+            [ ul [] (List.map (\var -> li [] [ text (var.name ++ " = " ++ var.value) ]) model.variables) ]
+        ]

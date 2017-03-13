@@ -12416,389 +12416,129 @@ var _elm_lang$html$Html_Events$Options = F2(
 		return {stopPropagation: a, preventDefault: b};
 	});
 
-var _user$project$Main$button = F2(
-	function (label, msg) {
-		return A2(
-			_elm_lang$html$Html$div,
-			{
-				ctor: '::',
-				_0: _elm_lang$html$Html_Attributes$class('button is-primary'),
-				_1: {
-					ctor: '::',
-					_0: _elm_lang$html$Html_Events$onClick(msg),
-					_1: {ctor: '[]'}
-				}
-			},
-			{
-				ctor: '::',
-				_0: _elm_lang$html$Html$text(label),
-				_1: {ctor: '[]'}
-			});
-	});
-var _user$project$Main$textAreaInput = F3(
-	function (msg, label, inputValue) {
-		return A2(
-			_elm_lang$html$Html$p,
-			{
-				ctor: '::',
-				_0: _elm_lang$html$Html_Attributes$class('control'),
-				_1: {ctor: '[]'}
-			},
-			{
-				ctor: '::',
-				_0: A2(
-					_elm_lang$html$Html$textarea,
-					{
-						ctor: '::',
-						_0: _elm_lang$html$Html_Attributes$class('textarea'),
-						_1: {
-							ctor: '::',
-							_0: _elm_lang$html$Html_Events$onInput(msg),
-							_1: {
-								ctor: '::',
-								_0: _elm_lang$html$Html_Attributes$placeholder(label),
-								_1: {
-									ctor: '::',
-									_0: _elm_lang$html$Html_Attributes$value(inputValue),
-									_1: {ctor: '[]'}
-								}
-							}
-						}
-					},
-					{ctor: '[]'}),
-				_1: {ctor: '[]'}
-			});
-	});
-var _user$project$Main$textInput = F3(
-	function (msg, label, inputValue) {
-		return A2(
-			_elm_lang$html$Html$p,
-			{
-				ctor: '::',
-				_0: _elm_lang$html$Html_Attributes$class('control'),
-				_1: {ctor: '[]'}
-			},
-			{
-				ctor: '::',
-				_0: A2(
-					_elm_lang$html$Html$input,
-					{
-						ctor: '::',
-						_0: _elm_lang$html$Html_Attributes$class('input is-primary'),
-						_1: {
-							ctor: '::',
-							_0: _elm_lang$html$Html_Events$onInput(msg),
-							_1: {
-								ctor: '::',
-								_0: _elm_lang$html$Html_Attributes$type_('text'),
-								_1: {
-									ctor: '::',
-									_0: _elm_lang$html$Html_Attributes$placeholder(label),
-									_1: {
-										ctor: '::',
-										_0: _elm_lang$html$Html_Attributes$value(inputValue),
-										_1: {ctor: '[]'}
-									}
-								}
-							}
-						}
-					},
-					{ctor: '[]'}),
-				_1: {ctor: '[]'}
-			});
-	});
-var _user$project$Main$updateCategoryInput = F4(
-	function (input, value, id, cat) {
-		var _p0 = input;
-		if (_p0.ctor === 'TitleInput') {
-			return _elm_lang$core$Native_Utils.eq(cat.id, id) ? _elm_lang$core$Native_Utils.update(
-				cat,
-				{titleInput: value}) : cat;
-		} else {
-			return _elm_lang$core$Native_Utils.eq(cat.id, id) ? _elm_lang$core$Native_Utils.update(
-				cat,
-				{contentInput: value}) : cat;
-		}
-	});
-var _user$project$Main$initialModel = {
-	widgets: {ctor: '[]'},
-	categories: {ctor: '[]'},
-	categoryInput: '',
-	lastId: 0
-};
-var _user$project$Main$Model = F4(
-	function (a, b, c, d) {
-		return {widgets: a, categories: b, categoryInput: c, lastId: d};
-	});
-var _user$project$Main$Category = F4(
-	function (a, b, c, d) {
-		return {id: a, label: b, titleInput: c, contentInput: d};
-	});
-var _user$project$Main$Widget = F4(
-	function (a, b, c, d) {
-		return {id: a, category: b, title: c, content: d};
-	});
-var _user$project$Main$ContentInput = {ctor: 'ContentInput'};
-var _user$project$Main$TitleInput = {ctor: 'TitleInput'};
 var _user$project$Main$update = F2(
 	function (msg, model) {
-		var _p1 = msg;
-		switch (_p1.ctor) {
-			case 'SetTitleInput':
+		var _p0 = msg;
+		switch (_p0.ctor) {
+			case 'SetTagInput':
+				return _elm_lang$core$Native_Utils.update(
+					model,
+					{tagInput: _p0._0});
+			case 'SetVariableNameInput':
+				return _elm_lang$core$Native_Utils.update(
+					model,
+					{variableNameInput: _p0._0});
+			case 'SetVariableValueInput':
+				return _elm_lang$core$Native_Utils.update(
+					model,
+					{variableValueInput: _p0._0});
+			case 'AddTag':
 				return _elm_lang$core$Native_Utils.update(
 					model,
 					{
-						categories: A2(
-							_elm_lang$core$List$map,
-							A3(_user$project$Main$updateCategoryInput, _user$project$Main$TitleInput, _p1._1, _p1._0),
-							model.categories)
-					});
-			case 'SetContentInput':
-				return _elm_lang$core$Native_Utils.update(
-					model,
-					{
-						categories: A2(
-							_elm_lang$core$List$map,
-							A3(_user$project$Main$updateCategoryInput, _user$project$Main$ContentInput, _p1._1, _p1._0),
-							model.categories)
-					});
-			case 'AddWidget':
-				var _p2 = _p1._0;
-				return _elm_lang$core$Native_Utils.update(
-					model,
-					{
-						widgets: {ctor: '::', _0: _p2, _1: model.widgets},
-						lastId: model.lastId + 1,
-						categories: A2(
-							_elm_lang$core$List$map,
-							function (cat) {
-								return _elm_lang$core$Native_Utils.eq(cat.id, _p2.category) ? _elm_lang$core$Native_Utils.update(
-									cat,
-									{titleInput: '', contentInput: ''}) : cat;
-							},
-							model.categories)
-					});
-			case 'RemoveWidget':
-				return _elm_lang$core$Native_Utils.update(
-					model,
-					{
-						widgets: A2(
-							_elm_lang$core$List$filter,
-							function (widget) {
-								return !_elm_lang$core$Native_Utils.eq(widget.id, _p1._0);
-							},
-							model.widgets)
-					});
-			case 'AddCategory':
-				return _elm_lang$core$Native_Utils.update(
-					model,
-					{
-						categories: {ctor: '::', _0: _p1._0, _1: model.categories},
-						categoryInput: '',
+						tags: {ctor: '::', _0: _p0._0, _1: model.tags},
 						lastId: model.lastId + 1
+					});
+			case 'AddVariable':
+				return _elm_lang$core$Native_Utils.update(
+					model,
+					{
+						variables: {ctor: '::', _0: _p0._0, _1: model.variables},
+						variableNameInput: '',
+						variableValueInput: '',
+						lastId: model.lastId + 1
+					});
+			case 'AssignTag':
+				return _elm_lang$core$Native_Utils.update(
+					model,
+					{
+						variables: A2(
+							_elm_lang$core$List$map,
+							function ($var) {
+								return _elm_lang$core$Native_Utils.eq($var.id, _p0._0) ? _elm_lang$core$Native_Utils.update(
+									$var,
+									{
+										tags: {ctor: '::', _0: _p0._1, _1: $var.tags}
+									}) : $var;
+							},
+							model.variables)
+					});
+			case 'RemoveTag':
+				return _elm_lang$core$Native_Utils.update(
+					model,
+					{
+						variables: A2(
+							_elm_lang$core$List$map,
+							function ($var) {
+								return _elm_lang$core$Native_Utils.eq($var.id, _p0._0) ? _elm_lang$core$Native_Utils.update(
+									$var,
+									{
+										tags: A2(
+											_elm_lang$core$List$filter,
+											function (id) {
+												return !_elm_lang$core$Native_Utils.eq(id, _p0._1);
+											},
+											$var.tags)
+									}) : $var;
+							},
+							model.variables)
 					});
 			default:
 				return _elm_lang$core$Native_Utils.update(
 					model,
-					{categoryInput: _p1._0});
+					{
+						variables: A2(
+							_elm_lang$core$List$filter,
+							function ($var) {
+								return !_elm_lang$core$Native_Utils.eq($var.id, _p0._0);
+							},
+							model.variables)
+					});
 		}
 	});
-var _user$project$Main$SetCategoryInput = function (a) {
-	return {ctor: 'SetCategoryInput', _0: a};
+var _user$project$Main$initialModel = {
+	variables: {ctor: '[]'},
+	tags: {ctor: '[]'},
+	tagInput: '',
+	variableNameInput: '',
+	variableValueInput: '',
+	lastId: 1
 };
-var _user$project$Main$AddCategory = function (a) {
-	return {ctor: 'AddCategory', _0: a};
-};
-var _user$project$Main$RemoveWidget = function (a) {
-	return {ctor: 'RemoveWidget', _0: a};
-};
-var _user$project$Main$renderWidget = function (widget) {
-	return A2(
-		_elm_lang$html$Html$div,
-		{
-			ctor: '::',
-			_0: _elm_lang$html$Html_Attributes$class('card'),
-			_1: {ctor: '[]'}
-		},
-		{
-			ctor: '::',
-			_0: A2(
-				_elm_lang$html$Html$header,
-				{
-					ctor: '::',
-					_0: _elm_lang$html$Html_Attributes$class('card-header container'),
-					_1: {ctor: '[]'}
-				},
-				{
-					ctor: '::',
-					_0: A2(
-						_elm_lang$html$Html$p,
-						{
-							ctor: '::',
-							_0: _elm_lang$html$Html_Attributes$class('card-header-title columns'),
-							_1: {ctor: '[]'}
-						},
-						{
-							ctor: '::',
-							_0: A2(
-								_elm_lang$html$Html$span,
-								{
-									ctor: '::',
-									_0: _elm_lang$html$Html_Attributes$class('column'),
-									_1: {ctor: '[]'}
-								},
-								{
-									ctor: '::',
-									_0: _elm_lang$html$Html$text(widget.title),
-									_1: {ctor: '[]'}
-								}),
-							_1: {
-								ctor: '::',
-								_0: A2(
-									_elm_lang$html$Html$span,
-									{
-										ctor: '::',
-										_0: _elm_lang$html$Html_Attributes$class('icon'),
-										_1: {
-											ctor: '::',
-											_0: _elm_lang$html$Html_Events$onClick(
-												_user$project$Main$RemoveWidget(widget.id)),
-											_1: {ctor: '[]'}
-										}
-									},
-									{
-										ctor: '::',
-										_0: A2(
-											_elm_lang$html$Html$i,
-											{
-												ctor: '::',
-												_0: _elm_lang$html$Html_Attributes$class('fa fa-window-close'),
-												_1: {ctor: '[]'}
-											},
-											{ctor: '[]'}),
-										_1: {ctor: '[]'}
-									}),
-								_1: {ctor: '[]'}
-							}
-						}),
-					_1: {ctor: '[]'}
-				}),
-			_1: {
-				ctor: '::',
-				_0: A2(
-					_elm_lang$html$Html$div,
-					{
-						ctor: '::',
-						_0: _elm_lang$html$Html_Attributes$class('card-content'),
-						_1: {ctor: '[]'}
-					},
-					{
-						ctor: '::',
-						_0: A2(
-							_elm_lang$html$Html$div,
-							{
-								ctor: '::',
-								_0: _elm_lang$html$Html_Attributes$class('content'),
-								_1: {ctor: '[]'}
-							},
-							{
-								ctor: '::',
-								_0: _elm_lang$html$Html$text(widget.content),
-								_1: {ctor: '[]'}
-							}),
-						_1: {ctor: '[]'}
-					}),
-				_1: {ctor: '[]'}
-			}
-		});
-};
-var _user$project$Main$renderCategoryWidgets = F2(
-	function (category, model) {
-		return A2(
-			_elm_lang$html$Html$ul,
-			{ctor: '[]'},
-			A2(
-				_elm_lang$core$List$map,
-				_user$project$Main$renderWidget,
-				A2(
-					_elm_lang$core$List$filter,
-					function (widget) {
-						return _elm_lang$core$Native_Utils.eq(widget.category, category);
-					},
-					model.widgets)));
+var _user$project$Main$Model = F6(
+	function (a, b, c, d, e, f) {
+		return {variables: a, tags: b, tagInput: c, variableNameInput: d, variableValueInput: e, lastId: f};
 	});
-var _user$project$Main$AddWidget = function (a) {
-	return {ctor: 'AddWidget', _0: a};
-};
-var _user$project$Main$SetContentInput = F2(
+var _user$project$Main$Variable = F4(
+	function (a, b, c, d) {
+		return {id: a, name: b, value: c, tags: d};
+	});
+var _user$project$Main$Tag = F2(
 	function (a, b) {
-		return {ctor: 'SetContentInput', _0: a, _1: b};
+		return {id: a, label: b};
 	});
-var _user$project$Main$SetTitleInput = F2(
+var _user$project$Main$RemoveVariable = function (a) {
+	return {ctor: 'RemoveVariable', _0: a};
+};
+var _user$project$Main$RemoveTag = F2(
 	function (a, b) {
-		return {ctor: 'SetTitleInput', _0: a, _1: b};
+		return {ctor: 'RemoveTag', _0: a, _1: b};
 	});
-var _user$project$Main$renderCreateWidget = F2(
-	function (category, model) {
-		return A2(
-			_elm_lang$html$Html$div,
-			{ctor: '[]'},
-			{
-				ctor: '::',
-				_0: A3(
-					_user$project$Main$textInput,
-					_user$project$Main$SetTitleInput(category.id),
-					'Title',
-					category.titleInput),
-				_1: {
-					ctor: '::',
-					_0: A3(
-						_user$project$Main$textAreaInput,
-						_user$project$Main$SetContentInput(category.id),
-						'Content',
-						category.contentInput),
-					_1: {
-						ctor: '::',
-						_0: A2(
-							_user$project$Main$button,
-							'Add',
-							_user$project$Main$AddWidget(
-								A4(_user$project$Main$Widget, model.lastId, category.id, category.titleInput, category.contentInput))),
-						_1: {ctor: '[]'}
-					}
-				}
-			});
+var _user$project$Main$AssignTag = F2(
+	function (a, b) {
+		return {ctor: 'AssignTag', _0: a, _1: b};
 	});
-var _user$project$Main$renderWidgetGroup = F2(
-	function (model, category) {
-		return A2(
-			_elm_lang$html$Html$div,
-			{
-				ctor: '::',
-				_0: _elm_lang$html$Html_Attributes$class('column'),
-				_1: {ctor: '[]'}
-			},
-			{
-				ctor: '::',
-				_0: A2(
-					_elm_lang$html$Html$h3,
-					{ctor: '[]'},
-					{
-						ctor: '::',
-						_0: _elm_lang$html$Html$text(category.label),
-						_1: {ctor: '[]'}
-					}),
-				_1: {
-					ctor: '::',
-					_0: A2(_user$project$Main$renderCreateWidget, category, model),
-					_1: {
-						ctor: '::',
-						_0: A2(_user$project$Main$renderCategoryWidgets, category.id, model),
-						_1: {ctor: '[]'}
-					}
-				}
-			});
-	});
+var _user$project$Main$AddVariable = function (a) {
+	return {ctor: 'AddVariable', _0: a};
+};
+var _user$project$Main$AddTag = function (a) {
+	return {ctor: 'AddTag', _0: a};
+};
+var _user$project$Main$SetVariableValueInput = function (a) {
+	return {ctor: 'SetVariableValueInput', _0: a};
+};
+var _user$project$Main$SetVariableNameInput = function (a) {
+	return {ctor: 'SetVariableNameInput', _0: a};
+};
 var _user$project$Main$view = function (model) {
 	return A2(
 		_elm_lang$html$Html$div,
@@ -12810,41 +12550,92 @@ var _user$project$Main$view = function (model) {
 				{ctor: '[]'},
 				{
 					ctor: '::',
-					_0: A3(_user$project$Main$textInput, _user$project$Main$SetCategoryInput, 'New Category', model.categoryInput),
+					_0: A2(
+						_elm_lang$html$Html$input,
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html_Events$onInput(_user$project$Main$SetVariableNameInput),
+							_1: {ctor: '[]'}
+						},
+						{ctor: '[]'}),
 					_1: {
 						ctor: '::',
 						_0: A2(
-							_user$project$Main$button,
-							'New Category',
-							_user$project$Main$AddCategory(
-								A4(_user$project$Main$Category, model.lastId, model.categoryInput, '', ''))),
-						_1: {ctor: '[]'}
+							_elm_lang$html$Html$input,
+							{
+								ctor: '::',
+								_0: _elm_lang$html$Html_Events$onInput(_user$project$Main$SetVariableValueInput),
+								_1: {ctor: '[]'}
+							},
+							{ctor: '[]'}),
+						_1: {
+							ctor: '::',
+							_0: A2(
+								_elm_lang$html$Html$button,
+								{
+									ctor: '::',
+									_0: _elm_lang$html$Html_Events$onClick(
+										_user$project$Main$AddVariable(
+											A4(
+												_user$project$Main$Variable,
+												model.lastId,
+												model.variableNameInput,
+												model.variableValueInput,
+												{ctor: '[]'}))),
+									_1: {ctor: '[]'}
+								},
+								{
+									ctor: '::',
+									_0: _elm_lang$html$Html$text('add'),
+									_1: {ctor: '[]'}
+								}),
+							_1: {ctor: '[]'}
+						}
 					}
 				}),
 			_1: {
 				ctor: '::',
 				_0: A2(
 					_elm_lang$html$Html$div,
+					{ctor: '[]'},
 					{
 						ctor: '::',
-						_0: _elm_lang$html$Html_Attributes$class('columns'),
+						_0: A2(
+							_elm_lang$html$Html$ul,
+							{ctor: '[]'},
+							A2(
+								_elm_lang$core$List$map,
+								function ($var) {
+									return A2(
+										_elm_lang$html$Html$li,
+										{ctor: '[]'},
+										{
+											ctor: '::',
+											_0: _elm_lang$html$Html$text(
+												A2(
+													_elm_lang$core$Basics_ops['++'],
+													$var.name,
+													A2(_elm_lang$core$Basics_ops['++'], ' = ', $var.value))),
+											_1: {ctor: '[]'}
+										});
+								},
+								model.variables)),
 						_1: {ctor: '[]'}
-					},
-					A2(
-						_elm_lang$core$List$map,
-						_user$project$Main$renderWidgetGroup(model),
-						model.categories)),
+					}),
 				_1: {ctor: '[]'}
 			}
 		});
 };
 var _user$project$Main$main = _elm_lang$html$Html$beginnerProgram(
 	{model: _user$project$Main$initialModel, view: _user$project$Main$view, update: _user$project$Main$update})();
+var _user$project$Main$SetTagInput = function (a) {
+	return {ctor: 'SetTagInput', _0: a};
+};
 
 var Elm = {};
 Elm['Main'] = Elm['Main'] || {};
 if (typeof _user$project$Main$main !== 'undefined') {
-    _user$project$Main$main(Elm['Main'], 'Main', {"types":{"unions":{"Main.Msg":{"args":[],"tags":{"SetTitleInput":["Int","String"],"AddWidget":["Main.Widget"],"SetContentInput":["Int","String"],"AddCategory":["Main.Category"],"SetCategoryInput":["String"],"RemoveWidget":["Int"]}}},"aliases":{"Main.Category":{"args":[],"type":"{ id : Int , label : String , titleInput : String , contentInput : String }"},"Main.Widget":{"args":[],"type":"{ id : Int, category : Int, title : String, content : String }"}},"message":"Main.Msg"},"versions":{"elm":"0.18.0"}});
+    _user$project$Main$main(Elm['Main'], 'Main', {"types":{"unions":{"Main.Msg":{"args":[],"tags":{"SetVariableNameInput":["String"],"RemoveVariable":["Int"],"AssignTag":["Int","Int"],"SetTagInput":["String"],"RemoveTag":["Int","Int"],"AddVariable":["Main.Variable"],"AddTag":["Main.Tag"],"SetVariableValueInput":["String"]}}},"aliases":{"Main.Tag":{"args":[],"type":"{ id : Int, label : String }"},"Main.Variable":{"args":[],"type":"{ id : Int, name : String, value : String, tags : List Int }"}},"message":"Main.Msg"},"versions":{"elm":"0.18.0"}});
 }
 
 if (typeof define === "function" && define['amd'])
